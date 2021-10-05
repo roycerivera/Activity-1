@@ -1,5 +1,7 @@
 #sample text-based game with simple conditional statement
 character_health = 100
+ogre_health = 120
+goblin_health = 110
 item = ""
 import random
 
@@ -7,6 +9,7 @@ name = input("Enter your name: ")
 print("Hello " + name)
 
 while character_health > 0:
+
     if character_health != 100 and item == "Fish":
         n = input("You have taken some damage to heal select [1 to heal/ 0 to ignore]")
         if n == "1":
@@ -14,6 +17,21 @@ while character_health > 0:
             print("Your character's health is back to " + str(character_health))
         else :
              print("Your character's health is back to " + str(character_health))
+
+    elif  character_health != 100 and item == "Sky Guardian Helmet":
+                n = input("You have chance to heal!! using your:" + item + "! \n" + "[Press 1 to heal]")
+                if n == "1":
+                    character_health += 100
+                    print("Character health + 100! \n" + "Your Character Health is now: " + str(character_health))
+
+    elif  character_health != 100 and item == "Yinyang Umbrella":
+                n = input("You have chance to heal!! using your:" + item + "! \n" + "[Press 1 to Use]")
+                if n == "1":
+                    character_health += 70
+                    print("Character health + 70! \n" + "Your Character Health is now: " + str(character_health))
+
+
+  
 
     v = int(input("Choose 1 if you want to cross the river\nChoose 2 if you want to jump on the ravine\nChoose 3 if you want to fight monster in the dungeon \nInput: "))
    
@@ -41,24 +59,61 @@ while character_health > 0:
         character_health = character_health - 10
 
     elif v == 3:
+    
         #damages the player
         print("You have enter the dungeon")
         #monster attack
         chance = random.randint(0,9)
         if chance > 5:
-            item = "Monster"
-            print ("2 Monsters appeared !!!")
-            choice = input("Fight the Monsters! \n \t [1 to fight Regular Monster and 0 for fighting the Leader of the Monster]") 
+            
+            print ("A goblin Appeared !!!")
+            choice = input("Fight the The Goblin! \n \t [1 to fight using your Basic attack and 0 for to fight using your Ultimate Power]")
             if choice == "1":
-                print ("you defeated the monster and gain +50 health")
-                character_health += 50
-                print ("your character health is " + str (character_health))
+                print ("You dealt normal damage using your basic attack! goblin taken -20hp")
+                print ("Your Character taken some damage from the goblin! -20")
+                character_health -= 20
+                goblin_health -= 20
+                print ("Gobling Health: " + str (goblin_health))
             elif choice == "0":
-                print ("you fought the Leader of the Monsters")
-                character_health -= 100
+                print ("You dealt critical damages using your Ultimate attack! goblin taken -70hp")
+                print ("Your Character taken some damage from the goblin! -20")
+                character_health -= 20
+                goblin_health -= 70
+                print ("Goblin Health: " + str (goblin_health))
 
+            if goblin_health <= 0:
+                print("you have sucessfully deafeated the Goblin! and gain new item! ")
+                item = "Yinyang Umbrella"
+                print("You have found " + item + "!\n")
+               
+        else:
+            print ("An Ogre appeared!")
+            choice =  input("Fight the Ogre! \n \t [1 to Fight using your katana, or 0 to Fight using your Axe]")
+            if choice == "1":
+                print ("you faught using your katana! Ogre taken -60hp")
+                print ("your character taken some damage from the attack of the ogre! -30hp")
+                character_health -= 30
+                ogre_health -= 60
+                print ("Ogre Health: " + str (ogre_health))
+            elif choice == "0":
+                item = "Battle Potion"
+                print ("you fought using your axe! Ogre taken -20hp")
+                print ("your character taken some damages from the attack of the ogre! -30hp")
+                character_health -= 30
+                ogre_health -= 20
+                print("Ogre Health:" + str(ogre_health))
 
+                
+            if ogre_health <= 0:
+                print("you have sucessfully deafeated the Ogre! and gain new item! ")
+                item = "Sky Guardian Helmet"
+                print ("You have found " + item + "! \n")
 
+           
+
+                
+
+           
         
 
     else:
